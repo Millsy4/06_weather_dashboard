@@ -7,7 +7,7 @@ var citySearchButtonsArray = [];
 var day = moment().date();
 var month = (moment().month() + 1);
 var year = moment().year();
-// var secondDay = moment().add(1, 'days');
+
 
 renderPastSearches();
 
@@ -29,9 +29,6 @@ $('#citySearchBar').submit(function(event) {
     }
     containerCheck = true;
     city = $('#cityInfo').val();
-    // pastCitySearches.push(city);
-    // console.log(pastCitySearches);
-    // console.log(city);
     localStorage.setItem("pastCitySearches", JSON.stringify(city));
     $('#cityWeatherContainer').attr('style', 'visibility: visible; border: black; border-style: solid;')
 
@@ -51,9 +48,6 @@ $('#citySearchBar').submit(function(event) {
         var windSpeed = response.wind.speed;
         var longitude = response.coord.lon;
         var latitude = response.coord.lat;
-    
-        // console.log(longitude);
-        // console.log(latitude);
     
         var queryURLThree = "http://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=" + API_KEY;
         var cityButton = $('<button>');
@@ -87,7 +81,6 @@ $('#citySearchBar').submit(function(event) {
           url: queryURLThree,
           method: "GET"
         }).then(function(response) {
-        //   console.log(response);
           var uvIndex = response.value;
           
           console.log(uvIndex);
@@ -158,9 +151,6 @@ citySearchBar.addEventListener('click', function(event) {
 
   var target = event.target;
   console.log(target);
-  // if (target != 'button') {
-  //   return;
-  // }
 
   if (target.matches('button')) {
     var id = target.getAttribute('id');
@@ -179,10 +169,7 @@ citySearchBar.addEventListener('click', function(event) {
   }
 
   containerCheck = true;
-  // city = $('#cityInfo').val();
-  // pastCitySearches.push(city);
-  // console.log(pastCitySearches);
-  // console.log(city);
+
   $('#cityWeatherContainer').attr('style', 'visibility: visible; border: black; border-style: solid;')
 
   var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + API_KEY;
@@ -202,11 +189,7 @@ citySearchBar.addEventListener('click', function(event) {
       var longitude = response.coord.lon;
       var latitude = response.coord.lat;
   
-      // console.log(longitude);
-      // console.log(latitude);
-  
       var queryURLThree = "http://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=" + API_KEY;
-      // var cityButton = $('<button>');
       var weatherIconIMG = $('<img>');
       var temperatureP = $('<p>');
       var humidityP = $('<p>');
@@ -214,11 +197,6 @@ citySearchBar.addEventListener('click', function(event) {
       var cityHeading = $("<h2>");
       
       cityHeading.attr("id", "city");
-      // cityButton.text(city);
-      // cityButton.attr("id", city);
-      // cityButton.attr("type", "button");
-      // cityButton.attr("class", "btn btn-primary btn-block");
-      // cityButton.attr("style", "text-align: left");
       weatherIconIMG.attr('src', "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png")
       temperatureP.text('Temperature: ' + temperature);
       humidityP.text('Humidity: ' + humidity);
@@ -226,7 +204,6 @@ citySearchBar.addEventListener('click', function(event) {
       
       $('#cityWeatherContainer').append(cityHeading);
       cityHeading.text(city + ' ' + month + '/' + day + '/' + year).append(weatherIconIMG);
-      // $('#citySearchBar').append(cityButton);
       $('#cityWeatherContainer').append(temperatureP, humidityP, windSpeedP);
 
     
@@ -235,7 +212,6 @@ citySearchBar.addEventListener('click', function(event) {
         url: queryURLThree,
         method: "GET"
       }).then(function(response) {
-      //   console.log(response);
         var uvIndex = response.value;
         
         var uvIndexP = $('<p>');
@@ -265,7 +241,6 @@ citySearchBar.addEventListener('click', function(event) {
           url: queryURLFiveDay,
           method: "GET"
       }).then(function(response) {
-          // console.log(response);
           for (var i = 0; i <= 4; i++) {
             var fiveDayTemp = response.list[i].main.temp;
             var fiveDayHumidity = response.list[i].main.humidity;
@@ -314,10 +289,7 @@ function renderPastSearches() {
     }
     containerCheck = true;
     city = JSON.parse(localStorage.getItem("pastCitySearches"));
-    // pastCitySearches.push(city);
-    // console.log(pastCitySearches);
-    // console.log(city);
-    // localStorage.setItem("pastCitySearches", JSON.stringify(city));
+
     $('#cityWeatherContainer').attr('style', 'visibility: visible; border: black; border-style: solid;')
 
     var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + API_KEY;
@@ -336,9 +308,6 @@ function renderPastSearches() {
         var windSpeed = response.wind.speed;
         var longitude = response.coord.lon;
         var latitude = response.coord.lat;
-    
-        // console.log(longitude);
-        // console.log(latitude);
     
         var queryURLThree = "http://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=" + API_KEY;
         
@@ -377,7 +346,6 @@ function renderPastSearches() {
           url: queryURLThree,
           method: "GET"
         }).then(function(response) {
-        //   console.log(response);
           var uvIndex = response.value;
           
           var uvIndexP = $('<p>');
@@ -406,7 +374,6 @@ function renderPastSearches() {
             url: queryURLFiveDay,
             method: "GET"
         }).then(function(response) {
-            // console.log(response);
             for (var i = 0; i <= 4; i++) {
               var fiveDayTemp = response.list[i].main.temp;
               var fiveDayHumidity = response.list[i].main.humidity;
@@ -440,12 +407,3 @@ function renderPastSearches() {
     });
     $('#cityInfo').val('');
 }
-// $('button').click(function(event) {
-//   // event.preventDefault();
-//   // event.stopPropagation();
-//   var btnInfo = $(this).attr('id');
-//   console.log(btnInfo);
-// });
-
-
-// localStorageArray[(localStorageArray.length - 1)]

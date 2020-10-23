@@ -1,23 +1,24 @@
+// Set up global variables
 var API_KEY = "3612613b1f3879cb45fa48072460581b";
 var city = "";
 var pastCitySearches = [];
 var containerCheck = false;
-citySearchCount = 0;
+var citySearchCount = 0;
 var citySearchButtonsArray = [];
 var day = moment().date();
 var month = (moment().month() + 1);
 var year = moment().year();
 
-
+// Initialize rendering the past searches on page reload
 renderPastSearches();
 
+// Setup citySearchBar to run a function on submit, it will take in the city from the search bar and use it in the queryURL to run the ajax function
 $('#citySearchBar').submit(function(event) {
     event.preventDefault();
-    console.log(day);
-    console.log(month);
-    console.log(year);
+    
     citySearchCount++;
 
+    // Checks to see if the container exists and empties it if it does before it gets refilled
     if (containerCheck === true) {
       containerCheck = false;
       $('#cityWeatherContainer').empty();
@@ -27,28 +28,30 @@ $('#citySearchBar').submit(function(event) {
       }
 
     }
+
+    // Gets the info from the city and sets it to the city variable and saves it in the local storage
     containerCheck = true;
     city = $('#cityInfo').val();
     localStorage.setItem("pastCitySearches", JSON.stringify(city));
     $('#cityWeatherContainer').attr('style', 'visibility: visible; border: black; border-style: solid;')
 
+    // Sets up the urls to use within the ajax functions
     var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + API_KEY;
     var queryURLFiveDay = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=" + API_KEY;
     
-
+    // Runs the ajax function on the queryURL and retrieves the information necessary to fill the weather dashboard
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function(response) {
-        console.log(response);
-    
+        // Creates variables to store information from the API
         var temperature = response.main.temp;
         var humidity = response.main.humidity;
         var weatherIcon = response.weather[0].icon;
         var windSpeed = response.wind.speed;
         var longitude = response.coord.lon;
         var latitude = response.coord.lat;
-    
+        // Dynamically creates elemennts for the structure of the page
         var queryURLThree = "http://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=" + API_KEY;
         var cityButton = $('<button>');
         var weatherIconIMG = $('<img>');
@@ -56,7 +59,7 @@ $('#citySearchBar').submit(function(event) {
         var humidityP = $('<p>');
         var windSpeedP = $('<p>');
         var cityHeading = $("<h2>");
-        
+        // Adds attributes and texts to the elements
         cityHeading.attr("id", "city");
         cityButton.text(city);
         cityButton.attr("id", city);
@@ -67,7 +70,7 @@ $('#citySearchBar').submit(function(event) {
         temperatureP.text('Temperature: ' + temperature);
         humidityP.text('Humidity: ' + humidity);
         windSpeedP.text('Wind Speed: ' + windSpeed);
-        
+        // Appends everything to its proper location and sets the local storage on the city search array
         $('#cityWeatherContainer').append(cityHeading);
         cityHeading.text(city + ' ' + month + '/' + day + '/' + year).append(weatherIconIMG);
         $('#citySearchBar').append(cityButton);
@@ -75,8 +78,7 @@ $('#citySearchBar').submit(function(event) {
         localStorage.setItem("citySearchButtonsArray", JSON.stringify(citySearchButtonsArray));
         $('#cityWeatherContainer').append(temperatureP, humidityP, windSpeedP);
 
-      
-
+        
         $.ajax({
           url: queryURLThree,
           method: "GET"

@@ -36,8 +36,8 @@ $('#citySearchBar').submit(function(event) {
     $('#cityWeatherContainer').attr('style', 'visibility: visible; border: black; border-style: solid;')
 
     // Sets up the urls to use within the ajax functions
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + API_KEY;
-    var queryURLFiveDay = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=" + API_KEY;
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + API_KEY;
+    var queryURLFiveDay = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=" + API_KEY;
     
     // Runs the ajax function on the queryURL and retrieves the information necessary to fill the weather dashboard
     $.ajax({
@@ -52,7 +52,7 @@ $('#citySearchBar').submit(function(event) {
         var longitude = response.coord.lon;
         var latitude = response.coord.lat;
         // Dynamically creates elemennts for the structure of the page
-        var queryURLThree = "http://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=" + API_KEY;
+        var queryURLThree = "https://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=" + API_KEY;
         var cityButton = $('<button>');
         var weatherIconIMG = $('<img>');
         var temperatureP = $('<p>');
@@ -66,7 +66,7 @@ $('#citySearchBar').submit(function(event) {
         cityButton.attr("type", "button");
         cityButton.attr("class", "btn btn-primary btn-block");
         cityButton.attr("style", "text-align: left");
-        weatherIconIMG.attr('src', "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png")
+        weatherIconIMG.attr('src', "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png")
         temperatureP.text('Temperature: ' + temperature);
         humidityP.text('Humidity: ' + humidity);
         windSpeedP.text('Wind Speed: ' + windSpeed);
@@ -124,7 +124,7 @@ $('#citySearchBar').submit(function(event) {
               cardDate.text(month + '/' + nextDay + '/' + year)
               
               var cardIconIMG = $('<img>');
-              cardIconIMG.attr('src', "http://openweathermap.org/img/wn/" + fiveDayWeatherIcon + "@2x.png")
+              cardIconIMG.attr('src', "https://openweathermap.org/img/wn/" + fiveDayWeatherIcon + "@2x.png")
 
               var cardDiv = $("<div>");
               cardDiv.attr('class', 'card');
@@ -174,8 +174,8 @@ citySearchBar.addEventListener('click', function(event) {
 
   $('#cityWeatherContainer').attr('style', 'visibility: visible; border: black; border-style: solid;')
 
-  var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + API_KEY;
-  var queryURLFiveDay = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=" + API_KEY;
+  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + API_KEY;
+  var queryURLFiveDay = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=" + API_KEY;
   
 
   $.ajax({
@@ -191,7 +191,7 @@ citySearchBar.addEventListener('click', function(event) {
       var longitude = response.coord.lon;
       var latitude = response.coord.lat;
   
-      var queryURLThree = "http://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=" + API_KEY;
+      var queryURLThree = "https://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=" + API_KEY;
       var weatherIconIMG = $('<img>');
       var temperatureP = $('<p>');
       var humidityP = $('<p>');
@@ -199,7 +199,7 @@ citySearchBar.addEventListener('click', function(event) {
       var cityHeading = $("<h2>");
       
       cityHeading.attr("id", "city");
-      weatherIconIMG.attr('src', "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png")
+      weatherIconIMG.attr('src', "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png")
       temperatureP.text('Temperature: ' + temperature);
       humidityP.text('Humidity: ' + humidity);
       windSpeedP.text('Wind Speed: ' + windSpeed);
@@ -255,7 +255,7 @@ citySearchBar.addEventListener('click', function(event) {
             cardDate.text(month + '/' + nextDay + '/' + year)
 
             var cardIconIMG = $('<img>');
-            cardIconIMG.attr('src', "http://openweathermap.org/img/wn/" + fiveDayWeatherIcon + "@2x.png")
+            cardIconIMG.attr('src', "https://openweathermap.org/img/wn/" + fiveDayWeatherIcon + "@2x.png")
 
             var cardDiv = $("<div>");
             cardDiv.attr('class', 'card');
@@ -294,8 +294,8 @@ function renderPastSearches() {
 
     $('#cityWeatherContainer').attr('style', 'visibility: visible; border: black; border-style: solid;')
 
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + API_KEY;
-    var queryURLFiveDay = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=" + API_KEY;
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + API_KEY;
+    var queryURLFiveDay = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=" + API_KEY;
     
 
     $.ajax({
@@ -311,7 +311,7 @@ function renderPastSearches() {
         var longitude = response.coord.lon;
         var latitude = response.coord.lat;
     
-        var queryURLThree = "http://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=" + API_KEY;
+        var queryURLThree = "https://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=" + API_KEY;
         
         var weatherIconIMG = $('<img>');
         var temperatureP = $('<p>');
@@ -321,7 +321,7 @@ function renderPastSearches() {
         
         cityHeading.attr("id", "city");
         
-        weatherIconIMG.attr('src', "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png")
+        weatherIconIMG.attr('src', "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png")
         temperatureP.text('Temperature: ' + temperature);
         humidityP.text('Humidity: ' + humidity);
         windSpeedP.text('Wind Speed: ' + windSpeed);
@@ -386,7 +386,7 @@ function renderPastSearches() {
               cardDate.text(month + '/' + nextDay + '/' + year)
 
               var cardIconIMG = $('<img>');
-              cardIconIMG.attr('src', "http://openweathermap.org/img/wn/" + fiveDayWeatherIcon + "@2x.png")
+              cardIconIMG.attr('src', "https://openweathermap.org/img/wn/" + fiveDayWeatherIcon + "@2x.png")
 
               var cardDiv = $("<div>");
               cardDiv.attr('class', 'card');
